@@ -1,0 +1,23 @@
+{
+  "name": "cy-ui",
+  "version": "1.0.0",
+  "description": "teste de automação com ui",
+  "homepage": "https://github.com/gnasxd/Automa-o-de-UI-com-Cypress#readme",
+  "bugs": {
+    "url": "https://github.com/gnasxd/Automa-o-de-UI-com-Cypress/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnasxd/Automa-o-de-UI-com-Cypress.git"
+  },
+  "license": "ISC",
+  "author": "GuilhermeAugusto",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "dependencies": {
+    "cypress": "^14.5.4"
+  }
+}
