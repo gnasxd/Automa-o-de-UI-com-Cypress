@@ -9,6 +9,13 @@ class AppActions {
     cy.get('.single_add_to_cart_button').click();
 }
 
+IrParaCheckout(){
+
+cy.get('.dropdown-toggle > .mini-cart-items').click()
+
+cy.get('.checkout-button').should('be.visible').click()
+}
+   
   
 
 

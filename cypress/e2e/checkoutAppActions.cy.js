@@ -7,6 +7,8 @@ describe('Checkout com App Actions', () => {
   it('Deve realizar o fluxo de checkout', () => {
     cy.visit('/')
     appActions.adicionarProdutoNoCarrinho('Augusta Pullover Jacket', 'L', 'Orange', 1);
+    appActions.IrParaCheckout();
+    cy.contains('Compra realizada com sucesso').should('be.visible');
 
   });
 });
