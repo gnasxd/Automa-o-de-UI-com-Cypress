@@ -2,28 +2,45 @@
 
 describe('Carrinho de compras', () => {
     beforeEach(() => {
-        cy.setCookie('http://lojaebac.ebaconline.art.br') // garante o cookie
+        cy.setCookie('lojaebac', 'produto') // garante o cookie
         cy.visit('/produtos')
     })
+
+
+    it('Deve adicionar produto ao carrinho', () => {
+        cy.intercept('POST', '**/cart/add', {
+            statusCode: 200,
+            body: { success: true }
+        }).as('Ajax Full-Zip Sweatshirt')
+
+        cy.get('.product-block').eq(3).click()
+
+        cy.get('.button-variable-item-M').click()
+
+        cy.get('.button-variable-item-Red').click();
+
+        cy.get('.single_add_to_cart_button').should('not.be.disabled').click();
+
+
+    });
+
+    it('Deve remover produto do carrinho', () => {
+        cy.intercept({
+            method: 'POST',
+            url: '**/carrinho/remover-item'
+        }).as('removeItem')
+
+        cy.get('a.remove').click()
+
+        cy.wait('@Ajax Full-Zip Sweatshirt').its('response.statusCode').should('eq', 200)
+
+
+        cy.get('.cart-empty.woocommerce-info').should('contain', 'Seu carrinho está vazio')
+
+
+
+    });
+
 })
-
-it('Deve adicionar produto ao carrinho', () => {
-    cy.intercept('POST', '**/cart/add', {
-        statusCode: 200,
-        body: { success: true }
-    }).as('Ingrid Running Jacket')
-
-    cy.get('button.variable-item.M').click();
-
-    // 4. Seleciona a cor "Red" - AQUI ESTÁ A CORREÇÃO
-    // Use o seletor que você pegar do Selector Playground. Será algo como:
-    cy.get('button.variable-item[data-value="Red"]').click();
-
-    // 5. Clique no botão de comprar
-    cy.get('.single_add_to_cart_button').should('not.be.disabled').click();
-
-    // 6. Espera a requisição com o alias CORRETO ser completada
-    cy.wait('Ingrid Running Jacket'); // Usando o alias renomeado
-});
 
 
