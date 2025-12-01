@@ -9,22 +9,16 @@ on:
    
 
 jobs:
-
-
-
  test:
- 
-   run-on: ubuntu-latest
-
-   
-   steps:
+  run-on: ubuntu-latest
+  steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v6
-   with:
+      with:
       node-version: '24'
-    -name: Cypress run
-      uses: cypress-io/github-action@v6
-      continue-on-error: true
+  -name: Cypress run
+  uses: cypress-io/github-action@v6
+       continue-on-error:true
       with:
        install-command: npm install
        browser: chrome
